@@ -1,5 +1,7 @@
-from contextlib import asynccontextmanager
+from dotenv import load_dotenv
+load_dotenv()
 
+from contextlib import asynccontextmanager
 import os
 from fastapi import FastAPI, Request
 from app.bot import application as telegram_app
@@ -13,6 +15,8 @@ WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 async def lifespan(app: FastAPI):
     print("Starting up...")
     init_db()
+
+    await telegram_app.initialize()
 
     if WEBHOOK_URL:
         await bot.set_webhook(url=WEBHOOK_URL)

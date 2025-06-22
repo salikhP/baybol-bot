@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, JSONB
+from sqlalchemy import Column, Integer
+from sqlalchemy.dialects.postgresql import JSONB
 from app.db import Base
 
 class User(Base):
